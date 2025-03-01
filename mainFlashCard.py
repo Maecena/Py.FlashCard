@@ -4,57 +4,47 @@ import random
 ##    while True:
 ##        addQuestion()
 
-easy = 12
-medium = 7
+easy = -5
+hard = 5
 
 #holds the flash cards, key is a number and class Card is the card
-questionDict = {}
+questionList = []  
 
 class Card:
     def __init__(self, answer, question):
-        self.level = "hard"
+        self.level = "regular"
         self.challenge = 0
         self.answer = answer
         self.question = question
         
     #adds or subtracts from the challenge level
     def correct(self):
-        choice = input("Did you get it right? y/n")
-        while choice != "y" or "n":
-            if choice == "y":
-                self.challenge += 1
-                levelCheck(self)
-            elif choice == "n":
-                self.challenge -= 1
-                levelCheck(self)
+        choice = None
+        while choice != "y" or choice != "n":
+            choice = input("Did you get it right? y/n")
+        if choice == "y":
+            self.challenge -= 1
+            levelCheck(self)
+        elif choice == "n":
+            self.challenge += 1
+            levelCheck(self)
 
     #checks to see what the level should be
     def levelCheck(self):
-        if self.challege < medium:
-            self.level = "hard"
-        elif self.challenge < easy:
-            self.level = "medium"
-        else:
+        if self.challege <= easy:
             self.level = "easy"
-
-
-##def difficulty():
-##    x = randint(1, 10)
-##    if x <= 6:
-##        return "hard"
-##    elif x <= 9:
-##        return "medium"
-##    else:
-##        return "easy"
+        elif self.challenge >= hard:
+            self.level = "hard"
+        else:
+            self.level = "regular"
 
 #adds flash card
 def addQuestion():
-    z = 0
     question = input("What's the question?")
     answer = input("And the answer is?")
-    questionDict[z] = Card(answer, question)
-    z += 1
+    questionList.append(Card(answer, question))
 
-##def showDict():
-##    for k, v in questionDict.items():
-##        print (k, v)
+
+##FUTURE
+
+#make lists based
