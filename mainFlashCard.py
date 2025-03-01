@@ -20,16 +20,13 @@ class Card:
     #adds or subtracts from the challenge level
     def correct(self):
         choice = input("Did you get it right? y/n")
-        x = 1
-        while x == 1:
+        while choice != "y" or "n":
             if choice == "y":
                 self.challenge += 1
                 levelCheck(self)
-                x += 1
             elif choice == "n":
                 self.challenge -= 1
                 levelCheck(self)
-                x -= 1
 
     #checks to see what the level should be
     def levelCheck(self):
