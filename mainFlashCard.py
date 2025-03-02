@@ -1,23 +1,29 @@
 import random
 
+##can't decide if i need a master list class, dictionary or something else. going to stop here
+
 def main():
     runMainMenu()
 
+#variables that don't change
 easy = -5
 hard = 5
 
-#holds the flash cards, key is a number and class Card is the card
-questionList = []  
+questionList = []
+currentList = questionList
 
+masterList = {"first list": questionList}
 
+#Meg's menu system
 def runMainMenu():
     while True:
         options = {
             1: ("Add Cards To Current List", "add card"),
             2: ("Do A Set Of Questions", "play"),
-            3: ("View Current List", "view list"),
+            3: ("View Question List", "view list"),
             4: ("Change Current List", "change list"),
-            5: ("Quit", "quit")
+            5: ("Delete Current List", "delete list"),
+            6: ("Quit", "quit")
         }
         nextAction = displayMenuPrompt(options)
 
@@ -36,6 +42,10 @@ def runMainMenu():
         elif nextAction == "change list":
             #does nothing
             changeList()
+
+        elif nextAction == "delete list":
+            #does nothing
+            deleteList()
             
         elif nextAction == "quit":
             #works!
@@ -74,8 +84,12 @@ class Card:
         else:
             self.level = "regular"
 
+    #prints out questions for viewList function
     def printQuestion(self):
         print (self.question)
+
+
+
 
 
 #runs from the main menu to add lots of flash cards
@@ -96,7 +110,7 @@ def addQuestion():
 def runSetOfQuestions():
     pass
 
-#
+#prints the current list of questions
 def viewList(x):
     for question in x:
         Card.printQuestion(question)
@@ -104,26 +118,35 @@ def viewList(x):
 
 #
 def changeList():
-    pass
+    for key in masterList:
+        print (key)
+    choice = None
+    while choice == None:
+        choiceOfList = input("which list would you like?: ")
+        if choiceOfList = key in masterList:
+            currentList
     
 
-questionList.append(Card("how are you?", "fine, thanks"))
-questionList.append(Card("how are you?", "fine, thanks"))
-questionList.append(Card("how are you?", "fine, thanks"))
+#
+def deleteList():
+    pass
+
+
+questionList.append(Card("how are you?1", "fine, thanks", currentListName))
+questionList.append(Card("how are you?2", "fine, thanks", currentListName))
+questionList.append(Card("how are you?3", "fine, thanks", currentListName))
 
 
 
 ##FUTURE FEATURES
 
-##view questions
+###delete unwanted cards
 
 ###save and load stuff
 
 ###ask questions from list, 5 random, X random
 
 ###make lists based on self.level
-
-###delete unwanted cards
 
 ###make different sets of question lists (dictionary of lists)
 
@@ -132,6 +155,12 @@ questionList.append(Card("how are you?", "fine, thanks"))
 ##scores and saving scores per set of questions
 
 ###type in answer mode
+
+
+
+##DONE FEATURES
+
+##view questions
 
 
 
