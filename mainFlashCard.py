@@ -15,18 +15,23 @@ def runMainMenu():
         options = {
             1: ("Add Cards To Current List", "add card"),
             2: ("Do A Set Of Questions", "play"),
-            3: ("Change Current List", "change list"),
-            4: ("Quit", "quit")
+            3: ("View Current List", "view list"),
+            4: ("Change Current List", "change list"),
+            5: ("Quit", "quit")
         }
         nextAction = displayMenuPrompt(options)
 
         if nextAction == "add card":
-            #does it work?
+            #works!
             addLotsOfQuestions()
 
         elif nextAction == "play":
             #does nothing
             runSetOfQuestions()
+
+        elif nextAction == "view list":
+            #works!
+            viewList(questionList)
 
         elif nextAction == "change list":
             #does nothing
@@ -38,20 +43,19 @@ def runMainMenu():
             exit(0)
 
 
-
 class Card:
-    def __init__(self, answer, question):
+    def __init__(self, question, answer):
         self.level = "regular"
         self.challenge = 0
         self.answer = answer
         self.question = question
         self.history = []
         
-    #adds or subtracts from the challenge level
+    #adds or subtracts from the challenge level, lower is easier, higher is harder
     def correct(self):
         choice = None
         while choice != "y" or choice != "n":
-            choice = input("Did you get it right? y/n")
+            choice = input("Did you get it right? y/n  ")
         if choice == "y":
             self.challenge -= 1
             levelCheck(self)
@@ -70,22 +74,32 @@ class Card:
         else:
             self.level = "regular"
 
-#adds flash card
-def addQuestion():
-    question = input("What's the question?")
-    answer = input("And the answer is?")
-    questionList.append(Card(answer, question))
+    def printQuestion(self):
+        print (self.question)
 
+
+#runs from the main menu to add lots of flash cards
 def addLotsOfQuestions():
     choice = None
     while choice != "n":
-        choice = input("Add a question? y/n")
+        choice = input("Add a question? y/n  ")
         if choice != "n":
             addQuestion()
 
+#adds flash card
+def addQuestion():
+    question = input("What's the question?  ")
+    answer = input("And the answer is?  ")
+    questionList.append(Card(question, answer))
+    
 #
 def runSetOfQuestions():
     pass
+
+#
+def viewList(x):
+    for question in x:
+        Card.printQuestion(question)
 
 
 #
@@ -93,15 +107,21 @@ def changeList():
     pass
     
 
+questionList.append(Card("how are you?", "fine, thanks"))
+questionList.append(Card("how are you?", "fine, thanks"))
+questionList.append(Card("how are you?", "fine, thanks"))
+
+
+
 ##FUTURE FEATURES
+
+##view questions
 
 ###save and load stuff
 
 ###ask questions from list, 5 random, X random
 
 ###make lists based on self.level
-
-##view all questions
 
 ###delete unwanted cards
 
@@ -112,6 +132,8 @@ def changeList():
 ##scores and saving scores per set of questions
 
 ###type in answer mode
+
+
 
 #Meg's code... makes the numbered menus work
 def displayMenuPrompt(options):
